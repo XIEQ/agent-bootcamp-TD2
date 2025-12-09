@@ -52,7 +52,7 @@ async def _main(question: str, gr_messages: list[ChatMessage]):
     """Initialize MCP Git server and run the agent."""
     setup_langfuse_tracer()
 
-    repo_path = os.path.abspath("/home/coder/agent-bootcamp")
+    repo_path = os.path.abspath("/home/coder/agent-bootcamp-TD2")
 
     with langfuse_client.start_as_current_span(name="Agents-SDK-Trace") as span:
         span.update(input=question)
