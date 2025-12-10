@@ -13,3 +13,5 @@ python ./src/eda_rajiv/trial_sandbox.py
 ```shell
 uv run --env-file .env gradio src/2_frameworks/3_code_interpreter/app_sqlite.py
 ```
+
+# Test Dec 10
