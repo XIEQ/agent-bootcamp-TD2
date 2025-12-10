@@ -21,7 +21,7 @@ wheels/
 *.DS_Store
 
 # Secrets
-# .env
+.env
 
 # Built documentations
 site/
