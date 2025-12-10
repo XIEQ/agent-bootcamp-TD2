@@ -7,7 +7,7 @@ wheels/
 *.egg-info
 
 # Virtual environments
-
+.venv
 
 # Lint & Test
 .mypy_cache/
@@ -21,7 +21,7 @@ wheels/
 *.DS_Store
 
 # Secrets
-.env
+# .env
 
 # Built documentations
 site/
