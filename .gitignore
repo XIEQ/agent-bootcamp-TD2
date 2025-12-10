@@ -7,7 +7,7 @@ wheels/
 *.egg-info
 
 # Virtual environments
-.venv
+# .venv
 
 # Lint & Test
 .mypy_cache/
