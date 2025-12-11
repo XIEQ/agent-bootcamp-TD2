@@ -38,7 +38,7 @@ async def main():
     await ci.sandbox_close()
 
 
-asyncio.run(main0())
-# asyncio.run(main()) # comment above line and then uncomment this line
+# asyncio.run(main0())
+asyncio.run(main()) # comment above line and then uncomment this line
 
 

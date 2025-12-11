@@ -9,7 +9,13 @@ python ./src/eda_rajiv/trial_sandbox.py
 ```
 
 # Run SQLite Interpreter App
-
+## Single Agent
 ```shell
 uv run --env-file .env gradio src/2_frameworks/3_code_interpreter/app_sqlite.py
+```
+
+## Multi Agent
+```shell
+uv run --env-file .env gradio src/2_frameworks/3_code_interpreter/app_sqlite_multiagent.py"
+
 ```

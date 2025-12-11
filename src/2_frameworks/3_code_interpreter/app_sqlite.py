@@ -25,13 +25,26 @@ from src.utils import (
 )
 from src.utils.langfuse.shared_client import langfuse_client
 
+import warnings
+warnings.filterwarnings("ignore")
 
 load_dotenv(verbose=True)
 
 set_up_logging()
 
 
-CODE_INTERPRETER_INSTRUCTIONS = """\
+# CODE_INTERPRETER_INSTRUCTIONS = """\
+# The `code_interpreter` tool executes SQL queries. \
+# Your output is an SQL query for a SQLite database.
+# You can access the local filesystem using this tool. \
+# The data is in `/data/fintran.db`.  Any query from the user should use this file.
+
+# Recommended packages: Pandas, Numpy, SymPy, Scikit-learn.
+# You can also run Jupyter-style shell commands (e.g., `!pip freeze`)
+# but you won't be able to install packages.
+
+# """
+CODE_INTERPRETER_INSTRUCTIONS = '''\
 The `code_interpreter` tool executes SQL queries. \
 Your output is an SQL query for a SQLite database.
 You can access the local filesystem using this tool. \
@@ -41,13 +54,107 @@ Recommended packages: Pandas, Numpy, SymPy, Scikit-learn.
 You can also run Jupyter-style shell commands (e.g., `!pip freeze`)
 but you won't be able to install packages.
 
+
+Few Shot Examples:
+Question: "What were the average transactions for spending on sports?"
+SQL: sql SELECT AVG(t.transaction_amount) FROM transactions t JOIN mcc_codes m ON t.mcc = m.mcc_code WHERE m.description LIKE '% sport %' OR m.description LIKE 'Sport %' OR '% Sport';
+Reason: The agent must find 'sport' but avoid matches like 'transport'. It must simulate whole-word matching using spaces inside the LIKE operator to ensure precision.
+
+
+Example Tablular Data:
+table: users_data
+columns: id,current_age,retirement_age,birth_year,birth_month,gender,address,latitude,longitude,per_capita_income,yearly_income,total_debt,credit_score,num_credit_cards
+data:
+825,53,66,1966,11,Female, Some Address 1,34.15,-117.76,$29278,$59696,$127613,787,5
+1164,43,70,1976,9,Male,,37.76,-122.44,$53797,$109687,$183855,675,1
+
+
+The schema is below. Note it's SQL Create table commands but enclosed in Python variables for my convenience.
+Extract the SQL Create table commands for your use.
+
+CARDS_DATA_TABLE = """
+CREATE TABLE cards_data (
+    id INTEGER PRIMARY KEY,
+    client_id INTEGER,
+    card_brand TEXT,
+    card_type TEXT,
+    card_number TEXT UNIQUE,
+    expires_month INT,
+    expires_year INT,
+    cvv INTEGER,
+    has_chip TEXT,
+    num_cards_issued INTEGER,
+    credit_limit FLOAT,  -- Stored as TEXT due to '$' sign
+    acct_open_month INTEGER,
+    acct_open_year INTEGER,
+    year_pin_last_changed INTEGER,
+    card_on_dark_web TEXT,
+    FOREIGN KEY (client_id) REFERENCES users_data(client_id)
+);
 """
 
+
+
+MCC_CODES_TABLE = """
+CREATE TABLE mcc_codes (
+id TEXT PRIMARY KEY,
+description TEXT
+);
+"""
+TRAIN_FRAUD_LABELS_TABLE = """
+CREATE TABLE train_fraud_labels (
+id TEXT PRIMARY KEY,
+label TEXT
+);
+"""
+USERS_DATA_TABLE = """
+CREATE TABLE users_data (
+    id INTEGER PRIMARY KEY,
+    current_age INTEGER,
+    retirement_age INTEGER,
+    birth_year INTEGER,
+    birth_month INTEGER,
+    gender TEXT,
+    address TEXT,
+    latitude REAL,
+    longitude REAL,
+    per_capita_income FLOAT,
+    yearly_income FLOAT,
+    total_debt FLOAT,
+    credit_score INTEGER,
+    num_credit_cards INTEGER
+);
+"""
+TRANSACTIONS_DATA_TABLE = """
+CREATE TABLE transactions_data (
+    id INTEGER PRIMARY KEY,
+    date DATETIME,
+    client_id INTEGER,
+    card_id INTEGER,
+    amount FLOAT,
+    use_chip TEXT,
+    merchant_id INTEGER,
+    merchant_city TEXT,
+    merchant_state TEXT,
+    zip TEXT,
+    mcc TEXT,
+    errors TEXT,
+    FOREIGN KEY (client_id) REFERENCES users_data(client_id),
+    FOREIGN KEY (card_id) REFERENCES cards_data(id),
+    FOREIGN KEY (mcc) REFERENCES mcc_codes(id)
+);
+"""
+
+'''
 AGENT_LLM_NAME = "gemini-2.5-flash"
 async_openai_client = AsyncOpenAI()
+global main_count
+import datetime
 
-
+    
 async def _main(question: str, gr_messages: list[ChatMessage]):
+    print(f"============ UTC:{datetime.datetime.utcnow()} =============")
+
     setup_langfuse_tracer()
     init_module_path = Path(eda_rajiv.__file__).parent / "sql.py"
     code_interpreter = await FinanceDataCodeInterpreter.create(
@@ -69,7 +176,7 @@ async def _main(question: str, gr_messages: list[ChatMessage]):
         ),
     )
 
-    with langfuse_client.start_as_current_span(name="Agents-SDK-Trace") as span:
+    with langfuse_client.start_as_current_span(name="TD2-EDA-Rajiv") as span:
         span.update(input=question)
 
         result_stream = agents.Runner.run_streamed(main_agent, input=question)
@@ -80,7 +187,9 @@ async def _main(question: str, gr_messages: list[ChatMessage]):
 
         span.update(output=result_stream.final_output)
 
+    print("============== gr_messages =================")
     pretty_print(gr_messages)
+
     yield gr_messages
 
 
@@ -91,11 +200,11 @@ demo = gr.ChatInterface(
     examples=[
         "how many users?",
         "compare spending of all males vs females. Which gender spends the most?",
-        "What is the sum of the column `y` in this example_a.csv?",
-        "Create a linear best-fit line for the data in example_a.csv.",
+        "How much did men spend on clothes?",
+        "How much did women spend on sports"
     ],
 )
 
 
 if __name__ == "__main__":
-    demo.launch(share=True)
+    demo.launch(share=False)
