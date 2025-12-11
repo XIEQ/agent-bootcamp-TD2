@@ -70,6 +70,9 @@ class CodeInterpreterOptimized:
             code : str
                 Python logic to execute.
         """
+        print("===== Run Code =======")
+        print(code)
+
         sbx = self.sbx
 
         result = await sbx.run_code(code, on_error=lambda error: print(error.traceback))
@@ -114,6 +117,7 @@ def read_file_as_string(filepath: str) -> str:
         raise IOError(f"An error occurred while reading the file: {e}")
 
 
+
 class FinanceDataCodeInterpreter:
     def __init__(
         self,
@@ -147,9 +151,21 @@ class FinanceDataCodeInterpreter:
 
     async def run_query(self, sql_command):
         # sql_command = 'select count(*) as count_cid from users_data'
-        code = f'query("{sql_command}")'
-        print(f"C:======== {sql_command} =========== ")
+        code = f'query("""{sql_command}""")'
+        from pprint import pprint
+        print("===== Run Query =======")
+        pprint(f"C:======== {sql_command} =========== ")
         return await self.cio.run_code(code)
 
     async def sandbox_close(self):
         await self.cio.sandbox_close()
+
+async def make_python_code_interpreter():
+    return await CodeInterpreterOptimized.create( template_name="0v90rfl2s90xby53zujh", timeout_seconds=300)
+
+async def make_fintran_db_code_interpreter(init_module_path):
+    return await FinanceDataCodeInterpreter.create(
+                            init_module_path = str(init_module_path),
+
+                            template_name="0v90rfl2s90xby53zujh",
+                            timeout_seconds=300)
