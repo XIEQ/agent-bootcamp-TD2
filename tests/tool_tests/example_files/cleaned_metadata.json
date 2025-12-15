@@ -1,0 +1,588 @@
+{
+  "timestamp": "2025-12-10T14:39:25.910617",
+  "file_name": "cleaned_sample_dataset.csv",
+  "file_path": "c:\\Users\\starx\\OneDrive\\Documents\\Repos\\AgenticEDA\\data\\cleaned_sample_dataset.csv",
+  "dataset_info": {
+    "total_rows": 38000,
+    "total_columns": 39,
+    "memory_usage_mb": 37.3
+  },
+  "columns": {
+    "transaction_id": {
+      "dtype": "int64",
+      "description": "Unique identifier for each transaction",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 38000,
+      "statistics": {
+        "min": 7476006.0,
+        "max": 23760417.0,
+        "mean": 15570770.23,
+        "median": 15547341.5,
+        "std": 4714953.96
+      }
+    },
+    "transaction_date": {
+      "dtype": "object",
+      "description": "Date and time of transaction (YYYY-MM-DD HH:MM:SS)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 37808,
+      "sample_values": [
+        "2012-11-23 16:03:00",
+        "2012-07-07 13:57:00",
+        "2010-06-10 16:59:00",
+        "2013-04-13 12:08:00",
+        "2013-04-18 10:00:00"
+      ]
+    },
+    "client_id": {
+      "dtype": "int64",
+      "description": "Unique identifier for the client/customer",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1218,
+      "statistics": {
+        "min": 0.0,
+        "max": 1998.0,
+        "mean": 1028.97,
+        "median": 1076.0,
+        "std": 583.37
+      }
+    },
+    "card_id": {
+      "dtype": "int64",
+      "description": "Unique identifier for the card used in transaction",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3838,
+      "statistics": {
+        "min": 0.0,
+        "max": 6138.0,
+        "mean": 3476.7,
+        "median": 3604.0,
+        "std": 1679.85
+      }
+    },
+    "amount": {
+      "dtype": "float64",
+      "description": "Transaction amount in USD (cleaned, numeric)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 11645,
+      "statistics": {
+        "min": -498.0,
+        "max": 1773.35,
+        "mean": 43.07,
+        "median": 29.15,
+        "std": 81.05
+      }
+    },
+    "use_chip": {
+      "dtype": "object",
+      "description": "Type of transaction - Swipe Transaction, Chip Transaction, Online Transaction",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3,
+      "sample_values": [
+        "Swipe Transaction",
+        "Chip Transaction",
+        "Online Transaction"
+      ]
+    },
+    "merchant_id": {
+      "dtype": "int64",
+      "description": "Unique identifier for the merchant",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 6183,
+      "statistics": {
+        "min": 22.0,
+        "max": 100340.0,
+        "mean": 47812.59,
+        "median": 45928.0,
+        "std": 25932.23
+      }
+    },
+    "merchant_city": {
+      "dtype": "object",
+      "description": "City where the merchant is located",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3459,
+      "sample_values": [
+        "Austin",
+        "Cape Coral",
+        "El Paso",
+        "Amelia",
+        "Arkadelphia"
+      ]
+    },
+    "merchant_state": {
+      "dtype": "object",
+      "description": "State where the merchant is located",
+      "non_null_count": 33610,
+      "null_count": 4390,
+      "null_percentage": 11.55,
+      "unique_count": 98,
+      "sample_values": [
+        "MN",
+        "FL",
+        "TX",
+        "OH",
+        "AR"
+      ]
+    },
+    "zip": {
+      "dtype": "float64",
+      "description": "ZIP code where the merchant is located",
+      "non_null_count": 33338,
+      "null_count": 4662,
+      "null_percentage": 12.27,
+      "unique_count": 6036,
+      "statistics": {
+        "min": 1040.0,
+        "max": 99687.0,
+        "mean": 51239.96,
+        "median": 47424.0,
+        "std": 29374.47
+      }
+    },
+    "mcc": {
+      "dtype": "int64",
+      "description": "Merchant Category Code (4-digit code)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 105,
+      "statistics": {
+        "min": 1711.0,
+        "max": 9402.0,
+        "mean": 5565.82,
+        "median": 5499.0,
+        "std": 870.37
+      }
+    },
+    "errors": {
+      "dtype": "object",
+      "description": "Any transaction errors or exceptions",
+      "non_null_count": 614,
+      "null_count": 37386,
+      "null_percentage": 98.38,
+      "unique_count": 8,
+      "sample_values": [
+        "Insufficient Balance",
+        "Technical Glitch",
+        "Bad PIN",
+        "Bad Card Number",
+        "Bad CVV"
+      ]
+    },
+    "card_brand": {
+      "dtype": "object",
+      "description": "Credit card brand (Visa, Mastercard, etc.)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 4,
+      "sample_values": [
+        "Mastercard",
+        "Visa",
+        "Amex",
+        "Discover"
+      ]
+    },
+    "card_type": {
+      "dtype": "object",
+      "description": "Type of card (Credit, Debit, Prepaid)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3,
+      "sample_values": [
+        "Debit",
+        "Credit",
+        "Debit (Prepaid)"
+      ]
+    },
+    "card_number": {
+      "dtype": "int64",
+      "description": "Card number (masked/last 4 digits format)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3838,
+      "statistics": {
+        "min": 300609782832003.0,
+        "max": 6994217664929322.0,
+        "mean": 4816742855373523.0,
+        "median": 5108584140975701.0,
+        "std": 1305293507164827.0
+      }
+    },
+    "expires": {
+      "dtype": "object",
+      "description": "Card expiration date (MM/YYYY format)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 180,
+      "sample_values": [
+        "06/2021",
+        "08/2020",
+        "12/2021",
+        "01/2024",
+        "07/2022"
+      ]
+    },
+    "cvv": {
+      "dtype": "int64",
+      "description": "Card Verification Value (security code)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 979,
+      "statistics": {
+        "min": 0.0,
+        "max": 999.0,
+        "mean": 495.44,
+        "median": 500.0,
+        "std": 288.7
+      }
+    },
+    "has_chip": {
+      "dtype": "object",
+      "description": "Whether card has EMV chip capability (Yes/No)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 2,
+      "sample_values": [
+        "YES",
+        "NO"
+      ]
+    },
+    "num_cards_issued": {
+      "dtype": "int64",
+      "description": "Number of cards issued to this client",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 3,
+      "statistics": {
+        "min": 1.0,
+        "max": 3.0,
+        "mean": 1.52,
+        "median": 2.0,
+        "std": 0.51
+      }
+    },
+    "credit_limit": {
+      "dtype": "int64",
+      "description": "Credit limit for the card in USD (cleaned, numeric)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 2493,
+      "statistics": {
+        "min": 0.0,
+        "max": 141391.0,
+        "mean": 15620.43,
+        "median": 13500.0,
+        "std": 12383.03
+      }
+    },
+    "acct_open_date": {
+      "dtype": "object",
+      "description": "Date the card account was opened (MM/YYYY)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 291,
+      "sample_values": [
+        "06/2007",
+        "09/2005",
+        "09/2008",
+        "02/2007",
+        "10/2011"
+      ]
+    },
+    "year_pin_last_changed": {
+      "dtype": "int64",
+      "description": "Year when PIN was last changed",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 19,
+      "statistics": {
+        "min": 2002.0,
+        "max": 2020.0,
+        "mean": 2011.34,
+        "median": 2011.0,
+        "std": 2.91
+      }
+    },
+    "card_on_dark_web": {
+      "dtype": "object",
+      "description": "Whether card information was found on dark web (Yes/No)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1,
+      "sample_values": [
+        "No"
+      ]
+    },
+    "current_age": {
+      "dtype": "int64",
+      "description": "Current age of client in years",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 74,
+      "statistics": {
+        "min": 23.0,
+        "max": 101.0,
+        "mean": 54.09,
+        "median": 52.0,
+        "std": 15.67
+      }
+    },
+    "retirement_age": {
+      "dtype": "int64",
+      "description": "Expected retirement age of client",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 27,
+      "statistics": {
+        "min": 53.0,
+        "max": 79.0,
+        "mean": 66.47,
+        "median": 66.0,
+        "std": 3.58
+      }
+    },
+    "birth_year": {
+      "dtype": "int64",
+      "description": "Year of birth (YYYY)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 74,
+      "statistics": {
+        "min": 1918.0,
+        "max": 1996.0,
+        "mean": 1965.1,
+        "median": 1967.0,
+        "std": 15.66
+      }
+    },
+    "birth_month": {
+      "dtype": "int64",
+      "description": "Month of birth (1-12)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 12,
+      "statistics": {
+        "min": 1.0,
+        "max": 12.0,
+        "mean": 6.56,
+        "median": 7.0,
+        "std": 3.6
+      }
+    },
+    "gender": {
+      "dtype": "object",
+      "description": "Gender of client (Male/Female)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 2,
+      "sample_values": [
+        "Male",
+        "Female"
+      ]
+    },
+    "address": {
+      "dtype": "object",
+      "description": "Residential address of client",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1218,
+      "sample_values": [
+        "498 Littlewood Avenue",
+        "600 Grant Lane",
+        "2111 Burns Street",
+        "9995 Pine Avenue",
+        "5380 12th Boulevard"
+      ]
+    },
+    "latitude": {
+      "dtype": "float64",
+      "description": "Geographic latitude of client address",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 740,
+      "statistics": {
+        "min": 21.3,
+        "max": 48.53,
+        "mean": 37.39,
+        "median": 38.35,
+        "std": 5.1
+      }
+    },
+    "longitude": {
+      "dtype": "float64",
+      "description": "Geographic longitude of client address",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 859,
+      "statistics": {
+        "min": -158.18,
+        "max": -68.67,
+        "mean": -91.56,
+        "median": -86.44,
+        "std": 16.26
+      }
+    },
+    "per_capita_income": {
+      "dtype": "int64",
+      "description": "Per capita income in USD (cleaned, numeric)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1119,
+      "statistics": {
+        "min": 0.0,
+        "max": 163145.0,
+        "mean": 24003.13,
+        "median": 21156.0,
+        "std": 12056.67
+      }
+    },
+    "yearly_income": {
+      "dtype": "int64",
+      "description": "Annual household income in USD (cleaned, numeric)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1200,
+      "statistics": {
+        "min": 1.0,
+        "max": 280199.0,
+        "mean": 46717.33,
+        "median": 40957.0,
+        "std": 24629.34
+      }
+    },
+    "total_debt": {
+      "dtype": "int64",
+      "description": "Total outstanding debt in USD (cleaned, numeric)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 1149,
+      "statistics": {
+        "min": 0.0,
+        "max": 461854.0,
+        "mean": 58032.68,
+        "median": 51633.0,
+        "std": 52143.94
+      }
+    },
+    "credit_score": {
+      "dtype": "int64",
+      "description": "Credit score (typically 300-850 range)",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 281,
+      "statistics": {
+        "min": 488.0,
+        "max": 850.0,
+        "mean": 713.26,
+        "median": 716.0,
+        "std": 65.66
+      }
+    },
+    "num_credit_cards": {
+      "dtype": "int64",
+      "description": "Number of credit cards held by client",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 9,
+      "statistics": {
+        "min": 1.0,
+        "max": 9.0,
+        "mean": 3.84,
+        "median": 4.0,
+        "std": 1.57
+      }
+    },
+    "mcc_description": {
+      "dtype": "object",
+      "description": "Human-readable description of Merchant Category Code",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 104,
+      "sample_values": [
+        "Telecommunication Services",
+        "Grocery Stores, Supermarkets",
+        "Drug Stores and Pharmacies",
+        "Money Transfer",
+        "Eating Places and Restaurants"
+      ]
+    },
+    "fraud_label": {
+      "dtype": "object",
+      "description": "Fraud label (Yes/No) - whether transaction is fraudulent",
+      "non_null_count": 25435,
+      "null_count": 12565,
+      "null_percentage": 33.07,
+      "unique_count": 2,
+      "sample_values": [
+        "No",
+        "Yes"
+      ]
+    },
+    "amount_len": {
+      "dtype": "int64",
+      "description": "Length of amount field in characters",
+      "non_null_count": 38000,
+      "null_count": 0,
+      "null_percentage": 0.0,
+      "unique_count": 4,
+      "statistics": {
+        "min": 5.0,
+        "max": 8.0,
+        "mean": 5.96,
+        "median": 6.0,
+        "std": 0.64
+      }
+    }
+  },
+  "data_quality": {
+    "total_cells": 1482000,
+    "missing_cells": 59003,
+    "missing_percentage": 3.98,
+    "duplicate_rows": 0,
+    "numeric_columns": 24,
+    "categorical_columns": 15,
+    "datetime_columns": 0
+  }
+}
