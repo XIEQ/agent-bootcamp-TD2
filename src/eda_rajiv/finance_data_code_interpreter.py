@@ -70,9 +70,6 @@ class CodeInterpreterOptimized:
             code : str
                 Python logic to execute.
         """
-        print("===== Run Code =======")
-        print(code)
-
         sbx = self.sbx
 
         result = await sbx.run_code(code, on_error=lambda error: print(error.traceback))
@@ -85,9 +82,6 @@ class CodeInterpreterOptimized:
             )
 
         return response.model_dump_json()
-        # finally:
-        #     await sbx.kill()
-
 
 def read_file_as_string(filepath: str) -> str:
     """
@@ -154,13 +148,13 @@ class FinanceDataCodeInterpreter:
         code = f'query("""{sql_command}""")'
         from pprint import pprint
         print("===== Run Query =======")
-        pprint(f"C:======== {sql_command} =========== ")
+        pprint(sql_command)
         return await self.cio.run_code(code)
 
     async def sandbox_close(self):
         await self.cio.sandbox_close()
 
-async def make_python_code_interpreter():
+async def make_python_code_interpreter(timeout=300):
     return await CodeInterpreterOptimized.create( template_name="0v90rfl2s90xby53zujh", timeout_seconds=300)
 
 async def make_fintran_db_code_interpreter(init_module_path):

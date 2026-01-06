@@ -33,6 +33,8 @@ load_dotenv(verbose=True)
 set_up_logging()
 
 
+WOMAN_SPORTS_PURCHASE_QUERY = "How much did women spend on sports"
+
 # CODE_INTERPRETER_INSTRUCTIONS = """\
 # The `code_interpreter` tool executes SQL queries. \
 # Your output is an SQL query for a SQLite database.
@@ -45,8 +47,9 @@ set_up_logging()
 
 # """
 CODE_INTERPRETER_INSTRUCTIONS = '''\
-The `code_interpreter` tool executes SQL queries. \
-Your output is an SQL query for a SQLite database.
+The `web_search` tool takes english like input and return back english like output. Use that to improve your dialect's queries or understand more about the financial domain.
+The `code_interpreter` tool executes SQL queries and returns back a JSON string with stdout and stderr \
+Your output is an SQL query without any markdown or surrounding quotes for a SQLite database.
 You can access the local filesystem using this tool. \
 The data is in `/data/fintran.db`.  Any query from the user should use this file.
 
@@ -57,7 +60,7 @@ but you won't be able to install packages.
 
 Few Shot Examples:
 Question: "What were the average transactions for spending on sports?"
-SQL: sql SELECT AVG(t.transaction_amount) FROM transactions t JOIN mcc_codes m ON t.mcc = m.mcc_code WHERE m.description LIKE '% sport %' OR m.description LIKE 'Sport %' OR '% Sport';
+Answer: SELECT AVG(t.transaction_amount) FROM transactions t JOIN mcc_codes m ON t.mcc = m.mcc_code WHERE m.description LIKE '% sport %' OR m.description LIKE 'Sport %' OR '% Sport';
 Reason: The agent must find 'sport' but avoid matches like 'transport'. It must simulate whole-word matching using spaces inside the LIKE operator to ensure precision.
 
 
@@ -151,7 +154,7 @@ async_openai_client = AsyncOpenAI()
 global main_count
 import datetime
 
-    
+
 async def _main(question: str, gr_messages: list[ChatMessage]):
     print(f"============ UTC:{datetime.datetime.utcnow()} =============")
 
@@ -193,18 +196,18 @@ async def _main(question: str, gr_messages: list[ChatMessage]):
     yield gr_messages
 
 
-demo = gr.ChatInterface(
-    _main,
-    title="2.1 OAI Agent SDK ReAct + LangFuse Code Interpreter",
-    type="messages",
-    examples=[
-        "how many users?",
-        "compare spending of all males vs females. Which gender spends the most?",
-        "How much did men spend on clothes?",
-        "How much did women spend on sports"
-    ],
-)
 
 
 if __name__ == "__main__":
+    demo = gr.ChatInterface(
+        _main,
+        title="2.1 OAI Agent SDK ReAct + LangFuse Code Interpreter",
+        type="messages",
+        examples=[
+            "how many users?",
+            "compare spending of all males vs females. Which gender spends the most?",
+            "How much did men spend on clothes?",
+            WOMAN_SPORTS_PURCHASE_QUERY 
+        ],
+    )
     demo.launch(share=False)
