@@ -19,3 +19,13 @@ uv run --env-file .env gradio src/2_frameworks/3_code_interpreter/app_sqlite.py
 uv run --env-file .env gradio src/2_frameworks/3_code_interpreter/app_sqlite_multiagent.py"
 
 ```
+
+## Langchain V1 Notebook
+```shell
+cd ./src/eda_rajiv
+uv sync # should create a .venv folder named rajiv-agent-bootcamp-202507
+source .venv/bin/activate
+python -m ipykernel install --user --name=.venv_rajiv
+PYTHONPATH=../../ jupyter notebook
+# open trial_langchain_v1.ipynb
+```
