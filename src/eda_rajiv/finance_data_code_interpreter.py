@@ -155,11 +155,13 @@ class FinanceDataCodeInterpreter:
         await self.cio.sandbox_close()
 
 async def make_python_code_interpreter(timeout=300):
-    return await CodeInterpreterOptimized.create( template_name="0v90rfl2s90xby53zujh", timeout_seconds=300)
+    print(f"Timeout:{timeout}")
+    return await CodeInterpreterOptimized.create( template_name="0v90rfl2s90xby53zujh", timeout_seconds=timeout)
 
-async def make_fintran_db_code_interpreter(init_module_path):
+async def make_fintran_db_code_interpreter(init_module_path, timeout=300):
+    print(f"Timeout:{timeout}")
     return await FinanceDataCodeInterpreter.create(
                             init_module_path = str(init_module_path),
 
                             template_name="0v90rfl2s90xby53zujh",
-                            timeout_seconds=300)
+                            timeout_seconds=timeout)

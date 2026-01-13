@@ -29,3 +29,12 @@ python -m ipykernel install --user --name=.venv_rajiv
 PYTHONPATH=../../ jupyter notebook
 # open trial_langchain_v1.ipynb
 ```
+
+## Gradio + Langchain
+
+```shell
+cd ./src/eda_rajiv
+uv sync # should create a .venv folder named rajiv-agent-bootcamp-202507
+source .venv/bin/activate
+PYTHONPATH=../../  uv run --env-file ../../.env gradio ./trial_gradio_new.py 
+```

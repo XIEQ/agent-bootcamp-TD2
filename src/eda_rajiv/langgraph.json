@@ -1,8 +1,8 @@
 {
   "dependencies": ["."],
   "graphs": {
-      "agent": "./sql_agent.py:agent",
-      "graph": "./sql_agent_langgraph.py:graph"
+    "agent": "./agent.py:agent",
+    "sql_agent": "./trial_langchain_v1_play.py:agent"
   },
-  "env": ".env"
+  "env": "../../.env"
 }

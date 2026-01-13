@@ -320,12 +320,6 @@ async def _main(question: str, gr_messages: list[ChatMessage]):
 
     with langfuse_client.start_as_current_span(name="TD2-EDA-Rajiv-LangChain") as span:
         span.update(input=question)
-
-        # result_stream = agents.Runner.run_streamed(main_agent, input=question)
-        # async for _item in result_stream.stream_events():
-        #     gr_messages += oai_agent_stream_to_gradio_messages(_item)
-        #     if len(gr_messages) > 0:
-        #         yield gr_messages
         for chunk in main_agent.stream({"messages": [{"role": "user", "content": question}]},
             stream_mode="updates",
         ):
@@ -355,18 +349,15 @@ demo = gr.ChatInterface(
 )
 
 
-async def _cleanup_clients() -> None:
-    """Close async clients."""
-    await async_openai_client.close()
 
 
-def _handle_sigint(signum: int, frame: object) -> None:
-    """Handle SIGINT signal to gracefully shutdown."""
-    with contextlib.suppress(Exception):
-        asyncio.get_event_loop().run_until_complete(_cleanup_clients())
-    sys.exit(0)
+# def _handle_sigint(signum: int, frame: object) -> None:
+#     """Handle SIGINT signal to gracefully shutdown."""
+#     with contextlib.suppress(Exception):
+#         asyncio.get_event_loop().run_until_complete(_cleanup_clients())
+#     sys.exit(0)
 
 
 if __name__ == "__main__":
-    signal.signal(signal.SIGINT, _handle_sigint)
+    # signal.signal(signal.SIGINT, _handle_sigint)
     demo.launch(share=False)
